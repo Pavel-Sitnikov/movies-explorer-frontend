@@ -1,22 +1,22 @@
-.navigation {
+.navigation-promo {
   display: flex;
   max-height: 66px;
   padding: 25px 0;
   background-color: #000000;
 }
 
-.navigation__list {
+.navigation-promo__list {
   margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
-.navigation__item {
+.navigation-promo__item {
   display: flex;
   gap: 40px;
 }
 
-.navigation__link {
+.navigation-promo__link {
   color: #ffffff;
   font-size: 13px;
   font-weight: 500;
@@ -27,6 +27,6 @@
   transition: 0.3s ease-in;
 }
 
-.navigation__link:hover {
+.navigation-promo__link:hover {
   opacity: 0.6;
 }

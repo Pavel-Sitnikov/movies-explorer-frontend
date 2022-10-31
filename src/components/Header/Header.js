@@ -1,28 +1,37 @@
 import "./Header.css";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import logoHeader from "../../images/header/logo.svg";
 
+import NavigationUser from "../NavigationUser/NavigationUser";
+import Navigation from "../Navigation/Navigation";
+
+import { pathnameForHeader } from "../../utils/constant";
+
 const Header = () => {
+  const location = useLocation();
+
+  function checkRoute(routes) {
+    return routes.some((pathname) => pathname === location.pathname);
+  }
+
   return (
-    <header className="header">
-      <Link to="/" className="header__link">
-        <img
-          className="header__logo"
-          src={logoHeader}
-          alt="Логотип Movies explorer"
-        />
-      </Link>
-      <div className="header__container">
-        <Link to="/signup" className="header__signup">
-          Регистрация
+    checkRoute(pathnameForHeader) && (
+      <header
+        className={location.pathname === "/" ? "header" : "header_movies"}
+      >
+        <Link to="/" className="header__link">
+          <img
+            className="header__logo"
+            src={logoHeader}
+            alt="Логотип Movies explorer"
+            title="О проекте"
+          />
         </Link>
-        <Link to="/signin" className="header__signin">
-          Войти
-        </Link>
-      </div>
-    </header>
+        {location.pathname === "/" ? <NavigationUser /> : <Navigation />}
+      </header>
+    )
   );
 };
 

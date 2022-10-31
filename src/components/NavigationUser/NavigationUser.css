@@ -1,0 +1,38 @@
+.navigation-auth {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.navigation-auth__container {
+  display: flex;
+  gap: 30px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation-auth__link {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: 0.3s ease-in;
+}
+
+.navigation-auth__link:hover {
+  opacity: 0.5;
+}
+
+.navigation-auth__link_signup {
+  color: #000000;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.navigation-auth__link_signin {
+  padding: 8px 20px;
+  background-color: #000000;
+  color: white;
+  border-radius: 3px;
+}

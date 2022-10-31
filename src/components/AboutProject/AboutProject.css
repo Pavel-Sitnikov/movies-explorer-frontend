@@ -6,7 +6,7 @@
 
 .about-project__title {
   margin: 0;
-  padding-bottom: 24px;
+  padding-bottom: 23px;
   font-size: 22px;
   font-weight: 400;
   line-height: 1.21;
@@ -15,7 +15,7 @@
 }
 
 .about-project__info {
-  padding-top: 69px;
+  padding-top: 70px;
 }
 
 .about-project__list {

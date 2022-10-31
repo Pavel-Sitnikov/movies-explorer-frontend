@@ -1,26 +1,4 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/inter.css);
 
-/* App */
-@import url(./components/App/App.css);
-
-/* Header */
-@import url(./components/Header/Header.css);
-
-/* Promo */
-@import url(./components/Promo/Promo.css);
-
-/* NavTab */
-@import url(./components/NavTab/NavTab.css);
-
-/* AboutProject */
-@import url(./components/AboutProject/AboutProject.css);
-
-/* Techs */
-@import url(./components/Techs/Techs.css);
-
-/* AboutMe */
-@import url(./components/AboutMe/AboutMe.css);
-
-/* Portfolio */
-@import url(./components/Portfolio/Portfolio.css);
+@import url(./components/MoviesCard/MoviesCard.css);
