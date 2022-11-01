@@ -7,7 +7,8 @@
 .movies__list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 58px 30px;
+  row-gap: 45px;
+  column-gap: 30px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -17,7 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 76px;
+  padding-top: 61px;
 }
 
 .movies__button-more {

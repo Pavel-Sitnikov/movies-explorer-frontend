@@ -7,7 +7,7 @@ const Login = () => {
       title="Рады видеть!"
       buttonName="Войти"
       questionText="Ещё не зарегистрированы?"
-      path="/signin"
+      path="/signup"
       link="Регистрация"
     >
       <label className="auth__label">
@@ -30,7 +30,7 @@ const Login = () => {
           placeholder=""
           required
         ></input>
-        <span className="auth__error">Что-то пошло не так...</span>
+        <span className="auth__error"></span>
       </label>
     </AuthFormContainer>
   );

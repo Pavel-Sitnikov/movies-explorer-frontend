@@ -8,7 +8,7 @@ const Register = () => {
       title="Добро пожаловать!"
       buttonName="Зарегистрироваться"
       questionText="Уже зарегистрированы?"
-      path="/signup"
+      path="/signin"
       link="Войти"
     >
       <label className="auth__label">

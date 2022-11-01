@@ -30,7 +30,6 @@
   line-height: 1.21;
   text-align: center;
   border: none;
-  border-radius: 8px;
 }
 
 .search__input::placeholder {
@@ -42,7 +41,7 @@
 }
 
 .search__input:focus {
-  outline: 1px solid #e8e8e8;
+  outline: none;
 }
 
 .search__button {

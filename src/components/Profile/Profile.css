@@ -55,13 +55,17 @@
   color: #000000;
 }
 
+.profile__input:focus {
+  outline: none;
+}
+
 .profile__btn {
   padding: 0;
   font-size: 13px;
   font-weight: 400;
   line-height: 1.18;
   text-align: center;
-  background-color: #ffffff;
+  background-color: transparent;
   border: none;
   cursor: pointer;
   transition: 0.3s ease-in;

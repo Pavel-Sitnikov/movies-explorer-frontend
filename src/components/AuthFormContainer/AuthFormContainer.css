@@ -59,6 +59,10 @@
   border-radius: 8px;
 }
 
+.auth__input:focus {
+  outline: none;
+}
+
 .auth__input::placeholder {
   color: #000000;
 }
