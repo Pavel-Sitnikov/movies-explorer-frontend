@@ -30,3 +30,14 @@
 .navigation-promo__link:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 567px) {
+  .navigation-promo__item {
+    gap: 25px;
+  }
+
+  .navigation-promo__link {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}

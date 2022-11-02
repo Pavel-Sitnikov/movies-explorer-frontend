@@ -46,3 +46,20 @@
 .not-found__btn:hover {
   opacity: 0.3;
 }
+
+@media screen and (max-width: 567px) {
+  .not-found__title {
+    margin: 0 auto 9px;
+    font-size: 80px;
+  }
+
+  .not-found__message {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .not-found__btn {
+    top: calc(100% - 38px);
+    font-size: 12px;
+  }
+}

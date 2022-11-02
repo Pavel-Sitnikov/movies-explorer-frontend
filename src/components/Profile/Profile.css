@@ -84,3 +84,34 @@
   font-weight: 500;
   color: #ff4062;
 }
+
+@media screen and (max-width: 800px) {
+  .profile {
+    padding: 231px 0 269px;
+  }
+
+  .profile__title {
+    margin-bottom: 78px;
+  }
+
+  .profile__btn_edit {
+    margin-top: 194px;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .profile {
+    max-width: 260px;
+    margin: 0 auto;
+    padding: 65px 0;
+  }
+
+  .profile__title {
+    margin-bottom: 63px;
+    align-self: stretch;
+  }
+
+  .profile__btn_edit {
+    margin-top: 361px;
+  }
+}

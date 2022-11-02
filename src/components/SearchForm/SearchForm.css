@@ -24,7 +24,6 @@
 .search__input {
   width: 90%;
   padding: 0;
-  font-family: "Inter";
   font-size: 28px;
   font-weight: 500;
   line-height: 1.21;
@@ -33,10 +32,6 @@
 }
 
 .search__input::placeholder {
-  font-family: "Inter";
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 1.21;
   color: #a0a0a0;
 }
 
@@ -57,4 +52,29 @@
 
 .search__button:hover {
   opacity: 0.6;
+}
+
+@media screen and (max-width: 800px) {
+  .search {
+    padding: 82px 31px 0;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .search {
+    padding: 88px 15px 0;
+  }
+
+  .search__icon {
+    display: none;
+  }
+
+  .search__container {
+    padding-bottom: 9px;
+  }
+
+  .search__input {
+    font-size: 18px;
+    text-align: left;
+  }
 }

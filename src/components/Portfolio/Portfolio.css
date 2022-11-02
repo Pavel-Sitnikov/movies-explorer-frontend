@@ -53,3 +53,47 @@
 .portfolio__link:hover {
   opacity: 0.3;
 }
+
+@media screen and (max-width: 800px) {
+  .portfolio {
+    padding: 25px 50px 0;
+  }
+
+  .portfolio__link {
+    padding-bottom: 23px;
+  }
+
+  .portfolio__link-text {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .portfolio {
+    padding: 9px 14px 0;
+  }
+
+  .portfolio__title {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .portfolio__list {
+    padding: 20px 0;
+  }
+
+  .portfolio__link {
+    padding-bottom: 19px;
+  }
+
+  .portfolio__link-text {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .portfolio__icon {
+    padding-top: 0;
+    font-size: 18px;
+  }
+}

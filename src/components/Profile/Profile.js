@@ -28,10 +28,10 @@ const Profile = () => {
         <button className="profile__btn profile__btn_edit" type="button">
           Редактировать
         </button>
-        <button className="profile__btn profile__btn_logout" type="button">
-          Выйти из аккаунта
-        </button>
       </form>
+      <button className="profile__btn profile__btn_logout" type="button">
+        Выйти из аккаунта
+      </button>
     </section>
   );
 };

@@ -98,3 +98,42 @@
   background-color: #f9f9f9;
   border-radius: 3px;
 }
+
+@media screen and (max-width: 905px) {
+  .movie {
+    max-width: 340px;
+  }
+
+  .movie__image {
+    height: 190px;
+  }
+
+  .movie__content {
+    margin: 20px 2px 0;
+  }
+
+  .movie__name {
+    height: 16px;
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .movie__image {
+    height: 168px;
+  }
+
+  .movie__button {
+    top: 10px;
+    right: 10px;
+    opacity: 1;
+  }
+
+  .movie__content {
+    margin: 12px 0 0;
+  }
+
+  .movie__name {
+    font-size: 12px;
+  }
+}

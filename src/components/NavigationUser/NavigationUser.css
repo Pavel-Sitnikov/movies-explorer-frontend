@@ -36,3 +36,27 @@
   color: white;
   border-radius: 3px;
 }
+
+@media screen and (max-width: 800px) {
+  .navigation-auth__container {
+    gap: 30px;
+  }
+
+  .navigation-auth__link_signin {
+    padding: 8px 21px;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .navigation-auth__container {
+    gap: 14px;
+  }
+  .navigation-auth__link {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .navigation-auth__link_signin {
+    padding: 7px 12px;
+  }
+}
