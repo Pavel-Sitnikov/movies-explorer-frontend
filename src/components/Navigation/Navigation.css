@@ -179,6 +179,12 @@
   }
 }
 
+@media screen and (max-width: 630px) {
+  .navigation__sidebar {
+    width: 100vw;
+  }
+}
+
 @media screen and (max-width: 540px) {
   .navigation__button-menu {
     width: 40px;
@@ -192,10 +198,6 @@
   .navigation__list {
     gap: 24px;
     padding-top: 105px;
-  }
-
-  .navigation__sidebar {
-    width: 100vw;
   }
 
   .navigation__text {

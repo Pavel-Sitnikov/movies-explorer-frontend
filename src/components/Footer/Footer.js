@@ -34,7 +34,7 @@ const Footer = () => {
               <li>
                 <a
                   className="footer__link"
-                  href="https://github.com"
+                  href="https://github.com/Pavel-Sitnikov"
                   target="_blank"
                   rel="noreferrer"
                 >

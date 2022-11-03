@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: all 0.6s linear;
+  transition: all 0.3s linear;
 }
 
 .popup__opened {
@@ -53,4 +53,20 @@
 
 .popup__close:hover {
   opacity: 0.3;
+}
+
+@media screen and (max-width: 584px) {
+  .popup__container {
+    max-width: 240px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+  }
+
+  .popup__message {
+    font-size: 16px;
+  }
+
+  .popup__close {
+    font-size: 12px;
+  }
 }

@@ -44,42 +44,42 @@ export const movies = [
     duration: "1ч 17м",
     image: movie1,
   },
-  // {
-  //   id: 7,
-  //   name: "Когда я думаю о Германии ночью",
-  //   duration: "1ч 17м",
-  //   image: movie1,
-  // },
-  // {
-  //   id: 8,
-  //   name: "Gimme Danger: История Игги и The Stooges",
-  //   duration: "1ч 17м",
-  //   image: movie1,
-  // },
-  // {
-  //   id: 9,
-  //   name: "Дженис: Маленькая девочка грустит",
-  //   duration: "1ч 17м",
-  //   image: movie1,
-  // },
-  // {
-  //   id: 10,
-  //   name: "Соберись перед прыжком",
-  //   duration: "1ч 17м",
-  //   image: movie1,
-  // },
-  // {
-  //   id: 11,
-  //   name: "Пи Джей Харви: A dog called money",
-  //   duration: "1ч 17м",
-  //   image: movie4,
-  // },
-  // {
-  //   id: 12,
-  //   name: "По волнам: Искусство звука в кино",
-  //   duration: "1ч 17м",
-  //   image: movie1,
-  // },
+  {
+    id: 7,
+    name: "Когда я думаю о Германии ночью",
+    duration: "1ч 17м",
+    image: movie1,
+  },
+  {
+    id: 8,
+    name: "Gimme Danger: История Игги и The Stooges",
+    duration: "1ч 17м",
+    image: movie1,
+  },
+  {
+    id: 9,
+    name: "Дженис: Маленькая девочка грустит",
+    duration: "1ч 17м",
+    image: movie1,
+  },
+  {
+    id: 10,
+    name: "Соберись перед прыжком",
+    duration: "1ч 17м",
+    image: movie1,
+  },
+  {
+    id: 11,
+    name: "Пи Джей Харви: A dog called money",
+    duration: "1ч 17м",
+    image: movie4,
+  },
+  {
+    id: 12,
+    name: "По волнам: Искусство звука в кино",
+    duration: "1ч 17м",
+    image: movie1,
+  },
 ];
 
 export const savedMovies = [
@@ -95,10 +95,10 @@ export const savedMovies = [
     duration: "1ч 17м",
     image: movie2,
   },
-  // {
-  //   id: 3,
-  //   name: "В погоне за Бенкси",
-  //   duration: "1ч 17м",
-  //   image: movie3,
-  // },
+  {
+    id: 3,
+    name: "В погоне за Бенкси",
+    duration: "1ч 17м",
+    image: movie3,
+  },
 ];
