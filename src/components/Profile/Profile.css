@@ -49,14 +49,11 @@
   text-align: right;
   color: #000000;
   border: none;
+  outline-color: #000000;
 }
 
 .profile__input::placeholder {
   color: #000000;
-}
-
-.profile__input:focus {
-  outline: none;
 }
 
 .profile__btn {

@@ -54,10 +54,7 @@
   background: #f9f9f9;
   border: none;
   border-radius: 8px;
-}
-
-.auth__input:focus {
-  outline: none;
+  outline-color: #000000;
 }
 
 .auth__input::placeholder {

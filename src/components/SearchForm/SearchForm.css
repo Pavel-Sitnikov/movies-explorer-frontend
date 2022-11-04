@@ -22,21 +22,19 @@
 }
 
 .search__input {
-  width: 90%;
+  width: 85%;
   padding: 0;
   font-size: 28px;
   font-weight: 500;
   line-height: 1.21;
   text-align: center;
   border: none;
+  border-radius: 48px;
+  outline-color: #e8e8e8;
 }
 
 .search__input::placeholder {
   color: #a0a0a0;
-}
-
-.search__input:focus {
-  outline: none;
 }
 
 .search__button {
@@ -76,5 +74,6 @@
   .search__input {
     font-size: 18px;
     text-align: left;
+    border-radius: 0;
   }
 }
