@@ -1,0 +1,79 @@
+.search {
+  padding: 65px 70px 0;
+}
+
+.search__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.search__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px #e8e8e8 solid;
+}
+
+.search__icon {
+  padding-left: 6px;
+  width: 34px;
+  height: 34px;
+}
+
+.search__input {
+  width: 85%;
+  padding: 0;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.21;
+  text-align: center;
+  border: none;
+  border-radius: 48px;
+  outline-color: #e8e8e8;
+}
+
+.search__input::placeholder {
+  color: #a0a0a0;
+}
+
+.search__button {
+  margin: 0;
+  padding: 0;
+  background: no-repeat transparent url(../../images/searchMovies/find.svg);
+  min-width: 34px;
+  height: 34px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+}
+
+.search__button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 800px) {
+  .search {
+    padding: 82px 31px 0;
+  }
+}
+
+@media screen and (max-width: 567px) {
+  .search {
+    padding: 88px 15px 0;
+  }
+
+  .search__icon {
+    display: none;
+  }
+
+  .search__container {
+    padding-bottom: 9px;
+  }
+
+  .search__input {
+    font-size: 18px;
+    text-align: left;
+    border-radius: 0;
+  }
+}

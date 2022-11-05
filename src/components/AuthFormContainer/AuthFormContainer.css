@@ -1,0 +1,148 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.auth__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 396px;
+  padding: 70px;
+}
+
+.auth__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.auth__title {
+  margin: 40px 0 29px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.21;
+}
+
+.auth__form {
+  position: relative;
+  min-width: 260px;
+  height: 407px;
+}
+
+.auth__label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 11px 0 21px;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #a0a0a0;
+}
+
+.auth__input {
+  position: relative;
+  margin-top: 10px;
+  padding: 15px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.18;
+  background: #f9f9f9;
+  border: none;
+  border-radius: 8px;
+  outline-color: #000000;
+}
+
+.auth__input::placeholder {
+  color: #000000;
+}
+
+.auth__error {
+  position: absolute;
+  top: calc(100% + 9px);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #ff4062;
+}
+
+.auth__btn-send {
+  width: 100%;
+
+  position: absolute;
+  bottom: 0px;
+  margin: 0 0 17px;
+
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.21;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.3s ease-in;
+}
+
+.auth__btn-send:hover {
+  opacity: 0.6;
+}
+
+.auth__question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #a0a0a0;
+}
+
+.auth__link {
+  color: #000000;
+  text-decoration: none;
+  transition: 0.3s ease-in;
+}
+
+.auth__link:hover {
+  opacity: 0.3;
+}
+
+@media screen and (max-width: 567px) {
+  .auth__container {
+    padding: 56px 30px 30px;
+    align-items: center;
+  }
+
+  .auth__title {
+    margin: 50px 0 70px;
+  }
+
+  .auth__form {
+    position: relative;
+    height: 478px;
+  }
+
+  .auth__label {
+    margin-bottom: 21px;
+  }
+
+  .auth__btn-send {
+    position: absolute;
+    bottom: 1px;
+    margin: 0 auto;
+    font-size: 12px;
+  }
+
+  .auth__question {
+    margin: 14px auto 0;
+    font-size: 12px;
+  }
+}
