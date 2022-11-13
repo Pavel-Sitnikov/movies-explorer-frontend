@@ -9,6 +9,9 @@ const AuthFormContainer = ({
   questionText,
   path,
   link,
+  isValid,
+  onSubmit,
+  textError,
 }) => {
   return (
     <section className="auth">
@@ -19,9 +22,16 @@ const AuthFormContainer = ({
           alt="Логотип Movies explorer"
         />
         <h2 className="auth__title">{title}</h2>
-        <form className="auth__form">
+        <form className="auth__form" onSubmit={onSubmit}>
           {children}
-          <button className="auth__btn-send" type="submit">
+          <span className="auth__submit-error">{textError}</span>
+          <button
+            className={`auth__btn-send ${
+              isValid ? "auth__btn-send" : "auth__btn-send_disabled"
+            }`}
+            type="submit"
+            disabled={!isValid}
+          >
             {buttonName}
           </button>
         </form>

@@ -7,9 +7,9 @@ import logoHeader from "../../images/header/logo.svg";
 import NavigationUser from "../NavigationUser/NavigationUser";
 import Navigation from "../Navigation/Navigation";
 
-import { pathnameForHeader } from "../../utils/constant";
+import { PATHNAME_FOR_HEADER } from "../../utils/constants";
 
-const Header = () => {
+const Header = ({ loggedIn }) => {
   const location = useLocation();
 
   function checkRoute(routes) {
@@ -17,7 +17,7 @@ const Header = () => {
   }
 
   return (
-    checkRoute(pathnameForHeader) && (
+    checkRoute(PATHNAME_FOR_HEADER) && (
       <header
         className={location.pathname === "/" ? "header" : "header_movies"}
       >
@@ -29,7 +29,7 @@ const Header = () => {
             title="О проекте"
           />
         </Link>
-        {location.pathname === "/" ? <NavigationUser /> : <Navigation />}
+        {loggedIn ? <Navigation /> : <NavigationUser />}
       </header>
     )
   );

@@ -33,7 +33,11 @@ const Navigation = () => {
             ></button>
             <ul className="navigation__list">
               <li className="navigation__item navigation__item_main">
-                <Link to="/" className="navigation__link">
+                <Link
+                  to="/"
+                  className="navigation__link"
+                  onClick={handleToggleMenu}
+                >
                   Главная
                 </Link>
               </li>
@@ -42,6 +46,7 @@ const Navigation = () => {
                   to="/movies"
                   className="navigation__link"
                   activeClassName="navigation__link_active"
+                  onClick={handleToggleMenu}
                 >
                   Фильмы
                 </NavLink>
@@ -51,6 +56,7 @@ const Navigation = () => {
                   to="/saved-movies"
                   className="navigation__link"
                   activeClassName="navigation__link_active"
+                  onClick={handleToggleMenu}
                 >
                   Сохранённые фильмы
                 </NavLink>
@@ -60,6 +66,7 @@ const Navigation = () => {
           <NavLink
             to="/profile"
             className="navigation__link navigation__link_user"
+            onClick={handleToggleMenu}
           >
             <p className="navigation__text">Аккаунт</p>
             <img

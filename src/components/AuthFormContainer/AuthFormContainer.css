@@ -29,6 +29,9 @@
 
 .auth__form {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
   min-width: 260px;
   height: 407px;
 }
@@ -62,6 +65,7 @@
 }
 
 .auth__error {
+  visibility: hidden;
   position: absolute;
   top: calc(100% + 9px);
   font-size: 10px;
@@ -70,13 +74,26 @@
   color: #ff4062;
 }
 
+.auth__error_visible {
+  visibility: visible;
+}
+
+.auth__submit-error {
+  position: absolute;
+  bottom: 70px;
+  align-self: center;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #ff4062;
+}
+
 .auth__btn-send {
   width: 100%;
-
   position: absolute;
   bottom: 0px;
+  left: 0;
   margin: 0 0 17px;
-
   padding: 14px;
   font-size: 14px;
   font-weight: 500;
@@ -91,6 +108,15 @@
 
 .auth__btn-send:hover {
   opacity: 0.6;
+}
+
+.auth__btn-send_disabled {
+  background-color: #989797;
+  cursor: not-allowed;
+}
+
+.auth__btn-send_disabled:hover {
+  opacity: unset;
 }
 
 .auth__question {
@@ -132,6 +158,14 @@
 
   .auth__label {
     margin-bottom: 21px;
+  }
+
+  .auth__submit-error {
+    bottom: 50px;
+  }
+
+  .auth__error {
+    top: calc(100%);
   }
 
   .auth__btn-send {
