@@ -17,6 +17,7 @@ const Navigation = () => {
       <button
         className="navigation__button-menu"
         type="button"
+        title="Меню"
         onClick={handleToggleMenu}
       ></button>
       <div
@@ -29,6 +30,7 @@ const Navigation = () => {
             <button
               className="navigation__button-close"
               type="button"
+              title="Закрыть меню"
               onClick={handleToggleMenu}
             ></button>
             <ul className="navigation__list">

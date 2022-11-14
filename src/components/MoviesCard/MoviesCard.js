@@ -16,7 +16,11 @@ const MoviesCard = ({ movie }) => {
   return (
     <li className="movie">
       <div className="movie__image-container">
-        <img className="movie__image" alt={movie.name} src={movie.image} />
+        <img
+          className="movie__image"
+          alt={movie.nameRU}
+          src={`https://api.nomoreparties.co/${movie.image.url}`}
+        />
 
         {location.pathname === "/saved-movies" ? (
           <button
@@ -32,7 +36,7 @@ const MoviesCard = ({ movie }) => {
         )}
       </div>
       <div className="movie__content">
-        <h2 className="movie__name">{movie.name}</h2>
+        <h2 className="movie__name">{movie.nameRU}</h2>
         <p className="movie__duration">{movie.duration}</p>
       </div>
     </li>
