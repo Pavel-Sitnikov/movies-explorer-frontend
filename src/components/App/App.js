@@ -2,7 +2,13 @@ import "./App.css";
 
 import { useState, useEffect, useCallback } from "react";
 
-import { Route, Switch, useHistory, Redirect } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useHistory,
+  Redirect,
+  useLocation,
+} from "react-router-dom";
 
 import ProtectedRoute from "../../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
@@ -24,20 +30,28 @@ import { moviesApi } from "../../utils/MoviesApi";
 import filteringMovies from "../../utils/filtering";
 
 function App() {
-  const history = useHistory();
-
   const [currentUser, setCurrentUser] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const [moviesMarkedSaved, setMoviesMarkedSaved] = useState([]);
+  const [processedMarkedSaved, setProcessedMarkedSaved] = useState([]);
+  const [checkedShortMovies, setCheckedShortMovies] = useState(false);
+  const [checkedSavedShortMovies, setCheckedSavedShortMovies] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [registerError, setRegisterError] = useState("");
   const [loginError, setLoginError] = useState("");
   const [userDataUpdateSuccessful, setUserDataUpdateSuccessful] =
     useState(false);
   const [userDataUpdateFailed, setUserDataUpdateFailed] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [movies, setMovies] = useState([]);
-  const [checkedShortMovies, setCheckedShortMovies] = useState(false);
-  const [isFailedRequest, setIsFailedRequest] = useState(false);
-  const [isNoFoundMovies, setIsNoFoundMovies] = useState(false);
+  const [failedRequest, setFailedRequest] = useState(false);
+  const [noFoundMovies, setNoFoundMovies] = useState(false);
+  const [noFoundSavedMovies, setNoFoundSavedMovies] = useState(false);
+
+  const history = useHistory();
+  const location = useLocation();
+
+  const pageWithSavedMovies =
+    location.pathname === "/saved-movies" ? true : false;
 
   useEffect(() => {
     mainApi
@@ -48,9 +62,24 @@ function App() {
       })
       .catch((err) => {
         setLoggedIn(false);
+        setMovies([]);
+        localStorage.clear();
         console.log(err);
       });
   }, [history]);
+
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi
+        .getSavedMovies()
+        .then((res) => {
+          setMoviesMarkedSaved(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
 
   function onLogin({ email, password }) {
     auth
@@ -85,6 +114,7 @@ function App() {
       .logout()
       .then(() => {
         setLoggedIn(false);
+        setMovies([]);
         history.push("/");
         localStorage.clear();
       })
@@ -106,60 +136,143 @@ function App() {
       });
   }
 
-  const handleSearchMovie = (value) => {
+  function handleSearchMovie(value) {
     if (movies.length === 0) {
       setIsLoading(true);
       moviesApi
         .getMovies()
         .then((res) => {
-          localStorage.setItem("Initial movies", JSON.stringify(res));
+          localStorage.setItem("initial movies", JSON.stringify(res));
           filterMovies(value);
         })
         .catch((err) => {
           console.log(err);
-          setIsFailedRequest(true);
+          setFailedRequest(true);
         })
         .finally(() => setIsLoading(false));
     }
     filterMovies(value);
-  };
+  }
 
   const filterMovies = useCallback(
     (value) => {
-      const savedMovies = JSON.parse(localStorage.getItem("Initial movies"));
-      if (savedMovies) {
+      const initialMovies = JSON.parse(localStorage.getItem("initial movies"));
+      if (initialMovies) {
         const filteredMovies = filteringMovies(
-          savedMovies,
+          initialMovies,
           value,
           checkedShortMovies
         );
         setMovies(filteredMovies);
-        localStorage.setItem("Filtered movies", JSON.stringify(filteredMovies));
-        localStorage.setItem("Input value", value);
+        localStorage.setItem("filtered movies", JSON.stringify(filteredMovies));
+        localStorage.setItem("input value", value);
         if (filteredMovies.length === 0 || null) {
-          setIsNoFoundMovies(true);
+          setNoFoundMovies(true);
         } else {
-          setIsNoFoundMovies(false);
+          setNoFoundMovies(false);
         }
       }
     },
     [checkedShortMovies]
   );
 
-  const handleCheckShortMovies = () => {
+  function filtersSavedMovies(value) {
+    const filteredMovies = filteringMovies(
+      moviesMarkedSaved,
+      value,
+      checkedShortMovies
+    );
+    setProcessedMarkedSaved(filteredMovies);
+    if (filteredMovies.length === 0 || null) {
+      setNoFoundSavedMovies(true);
+    } else {
+      setNoFoundSavedMovies(false);
+    }
+  }
+
+  const filtersSavedShortMovies = useCallback(() => {
+    if (checkedSavedShortMovies) {
+      const filtering = moviesMarkedSaved.filter((item) => item.duration <= 40);
+      setProcessedMarkedSaved(filtering);
+    } else {
+      setProcessedMarkedSaved(moviesMarkedSaved);
+    }
+  }, [checkedSavedShortMovies, moviesMarkedSaved]);
+
+  function handleCheckShortMovies() {
     setCheckedShortMovies(!checkedShortMovies);
     localStorage.setItem("checkbox", !checkedShortMovies);
-  };
+  }
+
+  function handdleCheckSavedShortMovies() {
+    setCheckedSavedShortMovies(!checkedSavedShortMovies);
+    localStorage.setItem("checkbox-saved", !checkedSavedShortMovies);
+  }
 
   useEffect(() => {
     const checkbox = localStorage.getItem("checkbox");
     setCheckedShortMovies(JSON.parse(checkbox));
+
+    const checkboxSaved = localStorage.getItem("checkbox-saved");
+    setCheckedSavedShortMovies(JSON.parse(checkboxSaved));
   }, []);
 
   useEffect(() => {
-    const storageInputValue = localStorage.getItem("Input value");
+    const storageInputValue = localStorage.getItem("input value");
     filterMovies(storageInputValue);
   }, [filterMovies, checkedShortMovies]);
+
+  useEffect(() => {
+    filtersSavedShortMovies();
+  }, [filtersSavedShortMovies, checkedSavedShortMovies]);
+
+  function handleToggleMarkerSave(data) {
+    // проверить еще раз
+    const saved = moviesMarkedSaved.some(
+      (item) => data.movieId === item.movieId
+    );
+
+    if (!saved) {
+      mainApi
+        .addMovieToSaved(data)
+        .then((res) => {
+          setMoviesMarkedSaved([res, ...moviesMarkedSaved]);
+        })
+        .catch((err) => console.log(err));
+    }
+
+    if (saved) {
+      const movie = moviesMarkedSaved.find(
+        (item) => item.movieId === data.movieId
+      );
+      mainApi
+        .deleteSavedMovie(movie)
+        .then((res) => {
+          setMoviesMarkedSaved(
+            moviesMarkedSaved.filter((item) => item._id !== movie._id && res)
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  function handleRemoveMoviesMarkedSaved(data) {
+    mainApi
+      .deleteSavedMovie(data)
+      .then((res) => {
+        setMoviesMarkedSaved(
+          moviesMarkedSaved.filter((item) => item._id !== data._id && res)
+        );
+      })
+      .catch((err) => console.log(err));
+  }
+
+  useEffect(() => {
+    if (!pageWithSavedMovies) {
+      setProcessedMarkedSaved(moviesMarkedSaved);
+      setNoFoundSavedMovies(false);
+    }
+  }, [pageWithSavedMovies, moviesMarkedSaved]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -170,26 +283,34 @@ function App() {
             <Main />
           </Route>
           <ProtectedRoute
-            exact
             path="/movies"
             component={Movies}
             loggedIn={loggedIn}
             movies={movies}
+            savedMovies={moviesMarkedSaved}
             onSubmit={handleSearchMovie}
             checked={checkedShortMovies}
             onChecked={handleCheckShortMovies}
             isLoading={isLoading}
-            isFailedRequest={isFailedRequest}
-            onUploadingMovies={isNoFoundMovies}
+            failedRequest={failedRequest}
+            handleToggleMarkerSave={handleToggleMarkerSave}
+            onUploadingMovies={noFoundMovies}
           ></ProtectedRoute>
+
           <ProtectedRoute
-            exact
             path="/saved-movies"
             component={SavedMovies}
             loggedIn={loggedIn}
-          ></ProtectedRoute>
+            savedMovies={processedMarkedSaved}
+            onSubmit={filtersSavedMovies}
+            checked={checkedSavedShortMovies}
+            onChecked={handdleCheckSavedShortMovies}
+            onDeleteMovie={handleRemoveMoviesMarkedSaved}
+            onUploadingMovies={noFoundSavedMovies}
+            pageWithSavedMovies={pageWithSavedMovies}
+          />
+
           <ProtectedRoute
-            exact
             path="/profile"
             component={Profile}
             loggedIn={loggedIn}

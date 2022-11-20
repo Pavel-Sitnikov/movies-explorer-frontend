@@ -5,27 +5,26 @@ import Preloader from "../Preloader/Preloader";
 
 const Movies = ({
   movies,
+  savedMovies,
   onSubmit,
   checked,
   onChecked,
   isLoading,
-  isFailedRequest,
+  failedRequest,
+  handleToggleMarkerSave,
   onUploadingMovies,
 }) => {
   return (
     <section>
-      <SearchForm
-        movies={movies}
-        onSubmit={onSubmit}
-        checked={checked}
-        onChecked={onChecked}
-      />
+      <SearchForm onSubmit={onSubmit} checked={checked} onChecked={onChecked} />
       {isLoading ? (
         <Preloader />
       ) : (
         <MoviesCardList
           movies={movies}
-          isFailedRequest={isFailedRequest}
+          savedMovies={savedMovies}
+          failedRequest={failedRequest}
+          handleToggleMarkerSave={handleToggleMarkerSave}
           onUploadingMovies={onUploadingMovies}
         />
       )}

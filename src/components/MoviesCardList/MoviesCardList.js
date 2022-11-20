@@ -5,42 +5,66 @@ import { useEffect } from "react";
 
 import usePagination from "../../utils/usePagination";
 import getWindowSize from "../../utils/useWindowResizing";
+import { LOADMORE } from "../../utils/constants";
 
-const MoviesCardList = ({ movies, isFailedRequest, onUploadingMovies }) => {
+const MoviesCardList = ({
+  movies,
+  savedMovies,
+  failedRequest,
+  handleToggleMarkerSave,
+  onDeleteMovie,
+  pageWithSavedMovies,
+  onUploadingMovies,
+}) => {
   const { loadMore, initValue, calcInitValue } = usePagination();
-  const windowSize = getWindowSize();
+  const screenSize = getWindowSize();
 
   useEffect(() => {
     calcInitValue();
-  }, [windowSize.width]);
+  }, [screenSize.width]);
 
   const pagination =
-    movies !== 0
+    movies !== null
       ? movies.length === 0 || movies.length <= initValue
         ? "movies__button-more_hidden"
-        : movies.length >= 3
+        : movies.length >= LOADMORE
         ? "movies__button-more"
         : "movies__button-more_hidden"
       : "";
 
   return (
     <section className="movies">
-      {isFailedRequest ? (
+      {failedRequest ? (
         <span className="movies__request-error">
-          «Во время запроса произошла ошибка. Возможно, проблема с соединением
-          или сервер недоступен. Подождите немного и попробуйте ещё раз»
+          Во время запроса произошла ошибка. Возможно, проблема с соединением
+          или сервер недоступен. Подождите немного и попробуйте ещё раз.
         </span>
       ) : onUploadingMovies ? (
-        <span className="movies__notfound">Фильмы не найдены</span>
+        <span className="movies__notfound">Ничего не найдено</span>
       ) : (
         <ul className="movies__list">
           {movies.slice(0, initValue).map((item) => {
-            return <MoviesCard key={item.id} movie={item} />;
+            return (
+              <MoviesCard
+                key={pageWithSavedMovies ? item.movieId : item.id}
+                movie={item}
+                savedMovies={savedMovies}
+                handleToggleMarkerSave={handleToggleMarkerSave}
+                onDeleteMovie={onDeleteMovie}
+                pageWithSavedMovies={pageWithSavedMovies}
+              />
+            );
           })}
         </ul>
       )}
       <div className="movies__container">
-        <button className={pagination} type="button" onClick={loadMore}>
+        <button
+          className={
+            pageWithSavedMovies ? "movies__button-more_hidden" : pagination
+          }
+          type="button"
+          onClick={loadMore}
+        >
           Ещё
         </button>
       </div>

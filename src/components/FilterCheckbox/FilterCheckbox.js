@@ -6,7 +6,6 @@ const FilterCheckbox = ({ checked, onChecked }) => {
       <label className="switcher__label">
         <input
           className="switcher__input"
-          id="Checkbox"
           type="checkbox"
           name="short"
           onChange={onChecked}

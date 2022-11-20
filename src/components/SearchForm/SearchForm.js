@@ -1,6 +1,6 @@
 import "./SearchForm.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import searchIcon from "../../images/searchMovies/searchIcon.svg";
 
@@ -8,6 +8,11 @@ import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 const SearchForm = ({ onSubmit, checked, onChecked }) => {
   const [searchText, setSearchText] = useState("");
+  const [errorText, setErrorText] = useState("");
+
+  useEffect(() => {
+    setErrorText("");
+  }, [searchText]);
 
   function handleInputChange(evt) {
     const target = evt.target;
@@ -18,7 +23,9 @@ const SearchForm = ({ onSubmit, checked, onChecked }) => {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onSubmit(searchText);
+    searchText === ""
+      ? setErrorText("Нужно ввести ключевое слово")
+      : onSubmit(searchText);
   }
 
   return (
@@ -39,6 +46,7 @@ const SearchForm = ({ onSubmit, checked, onChecked }) => {
             value={searchText}
             onChange={handleInputChange}
           ></input>
+          <span className="search__error">{errorText}</span>
           <button
             className="search__button"
             type="submit"
