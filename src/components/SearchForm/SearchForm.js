@@ -14,6 +14,13 @@ const SearchForm = ({ onSubmit, checked, onChecked }) => {
     setErrorText("");
   }, [searchText]);
 
+  useEffect(() => {
+    const searchTextValue = localStorage.getItem("input value");
+    if (searchTextValue) {
+      setSearchText(searchTextValue);
+    }
+  }, []);
+
   function handleInputChange(evt) {
     const target = evt.target;
     const value = target.value;
