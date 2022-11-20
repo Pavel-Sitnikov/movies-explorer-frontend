@@ -46,6 +46,7 @@ function App() {
   const [failedRequest, setFailedRequest] = useState(false);
   const [noFoundMovies, setNoFoundMovies] = useState(false);
   const [noFoundSavedMovies, setNoFoundSavedMovies] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const history = useHistory();
   const location = useLocation();
@@ -76,6 +77,7 @@ function App() {
           setMoviesMarkedSaved(res);
         })
         .catch((err) => {
+          setIsPopupOpen(true);
           console.log(err);
         });
     }
@@ -132,6 +134,7 @@ function App() {
       })
       .catch((err) => {
         setUserDataUpdateFailed(true);
+        setIsPopupOpen(true);
         console.log(err);
       });
   }
@@ -146,8 +149,9 @@ function App() {
           filterMovies(value);
         })
         .catch((err) => {
-          console.log(err);
           setFailedRequest(true);
+          setIsPopupOpen(true);
+          console.log(err);
         })
         .finally(() => setIsLoading(false));
     }
@@ -252,7 +256,10 @@ function App() {
             moviesMarkedSaved.filter((item) => item._id !== movie._id && res)
           );
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setIsPopupOpen(true);
+          console.log(err);
+        });
     }
   }
 
@@ -264,7 +271,10 @@ function App() {
           moviesMarkedSaved.filter((item) => item._id !== data._id && res)
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsPopupOpen(true);
+        console.log(err);
+      });
   }
 
   useEffect(() => {
@@ -273,6 +283,10 @@ function App() {
       setNoFoundSavedMovies(false);
     }
   }, [pageWithSavedMovies, moviesMarkedSaved]);
+
+  function popupClose() {
+    setIsPopupOpen(false);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -341,7 +355,7 @@ function App() {
           </Route>
         </Switch>
         <Footer />
-        <Popup />
+        <Popup isOpen={isPopupOpen} onClose={popupClose} />
       </div>
     </CurrentUserContext.Provider>
   );
