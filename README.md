@@ -1,8 +1,12 @@
 # Movies-explorer-frontend
 
+## Ссылка на pull request
+
+https://github.com/Pavel-Sitnikov/movies-explorer-frontend/pull/2#issue-1458317814
+
 ## Ссылка на репозиторий
 
-https://github.com/Pavel-Sitnikov/react-mesto-api-full
+https://github.com/Pavel-Sitnikov/movies-explorer-frontend
 
 ## Ссылка на макет дипломной работы Я.Диск:
 
