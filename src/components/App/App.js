@@ -10,7 +10,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import ProtectedRoute from "../../ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 
 import Header from "../Header/Header";
