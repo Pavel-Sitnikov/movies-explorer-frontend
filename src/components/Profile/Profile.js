@@ -11,6 +11,7 @@ const Profile = ({
   onUpdate,
   userDataUpdateSuccessful,
   userDataUpdateFailed,
+  isLoading,
 }) => {
   const currentUser = useContext(CurrentUserContext);
   const [buttonSubmitDisabled, setButtonSubmitDisabled] = useState(false);
@@ -30,8 +31,7 @@ const Profile = ({
   useEffect(() => {
     setButtonSubmitDisabled(
       !isValid ||
-        values.name === currentUser.name ||
-        values.email === currentUser.email
+        (values.name === currentUser.name && values.email === currentUser.email)
     );
   }, [isValid, currentUser, values]);
 
@@ -52,6 +52,7 @@ const Profile = ({
             required
             value={values.name}
             onChange={handleChange}
+            disabled={isLoading}
           ></input>
           <span
             className={`profile__error ${
@@ -67,9 +68,11 @@ const Profile = ({
             className="profile__input"
             type="email"
             name="email"
+            pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
             required
             value={values.email}
             onChange={handleChange}
+            disabled={isLoading}
           ></input>
           <span
             className={`profile__error ${
@@ -95,10 +98,10 @@ const Profile = ({
         )}
         <button
           className={`profile__btn profile__btn_edit ${
-            isValid ? "" : "profile__btn_edit_disabled"
+            buttonSubmitDisabled ? "profile__btn_edit_disabled" : ""
           }`}
           type="submit"
-          disabled={buttonSubmitDisabled}
+          disabled={buttonSubmitDisabled || isLoading}
         >
           Редактировать
         </button>

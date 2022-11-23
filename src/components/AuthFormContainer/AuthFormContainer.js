@@ -12,15 +12,19 @@ const AuthFormContainer = ({
   isValid,
   onSubmit,
   textError,
+  isLoading,
 }) => {
   return (
     <section className="auth">
       <div className="auth__container">
-        <img
-          className="auth__logo"
-          src={logoHeader}
-          alt="Логотип Movies explorer"
-        />
+        <Link to="/" className="auth__logo">
+          <img
+            className="auth__logo-img"
+            src={logoHeader}
+            alt="Логотип Movies explorer"
+            title="О проекте"
+          />
+        </Link>
         <h2 className="auth__title">{title}</h2>
         <form className="auth__form" onSubmit={onSubmit}>
           {children}
@@ -30,7 +34,7 @@ const AuthFormContainer = ({
               isValid ? "auth__btn-send" : "auth__btn-send_disabled"
             }`}
             type="submit"
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
           >
             {buttonName}
           </button>

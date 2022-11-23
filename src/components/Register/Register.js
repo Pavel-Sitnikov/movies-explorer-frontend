@@ -4,7 +4,12 @@ import AuthFormContainer from "../AuthFormContainer/AuthFormContainer";
 
 import useValidation from "../../utils/useValidation";
 
-const Register = ({ onRegister, registerError, setRegisterError }) => {
+const Register = ({
+  onRegister,
+  registerError,
+  setRegisterError,
+  isLoading,
+}) => {
   const registerData = {
     name: "",
     email: "",
@@ -39,6 +44,7 @@ const Register = ({ onRegister, registerError, setRegisterError }) => {
       resetForm={resetForm}
       onSubmit={handleSubmit}
       textError={registerError}
+      isLoading={isLoading}
     >
       <label className="auth__label">
         Имя
@@ -52,6 +58,7 @@ const Register = ({ onRegister, registerError, setRegisterError }) => {
           required
           value={values.name}
           onChange={handleInputChange}
+          disabled={isLoading}
         ></input>
         <span
           className={`auth__error ${
@@ -67,10 +74,11 @@ const Register = ({ onRegister, registerError, setRegisterError }) => {
           className="auth__input"
           type="email"
           name="email"
-          pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+          pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
           required
           value={values.email}
           onChange={handleInputChange}
+          disabled={isLoading}
         ></input>
         <span
           className={`auth__error ${
@@ -89,6 +97,7 @@ const Register = ({ onRegister, registerError, setRegisterError }) => {
           required
           value={values.password}
           onChange={handleInputChange}
+          disabled={isLoading}
         ></input>
         <span
           className={`auth__error ${

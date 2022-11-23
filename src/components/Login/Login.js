@@ -3,7 +3,7 @@ import "../AuthFormContainer/AuthFormContainer.css";
 
 import useValidation from "../../utils/useValidation";
 
-const Login = ({ onLogin, loginError, setLoginError }) => {
+const Login = ({ onLogin, loginError, setLoginError, isLoading }) => {
   const loginData = {
     email: "",
     password: "",
@@ -33,6 +33,7 @@ const Login = ({ onLogin, loginError, setLoginError }) => {
       resetForm={resetForm}
       onSubmit={handleSubmit}
       textError={loginError}
+      isLoading={isLoading}
     >
       <label className="auth__label">
         E-mail
@@ -44,6 +45,7 @@ const Login = ({ onLogin, loginError, setLoginError }) => {
           required
           value={values.email}
           onChange={handleInputChange}
+          disabled={isLoading}
         ></input>
         <span
           className={`auth__error ${
@@ -62,6 +64,7 @@ const Login = ({ onLogin, loginError, setLoginError }) => {
           required
           value={values.password}
           onChange={handleInputChange}
+          disabled={isLoading}
         ></input>
         <span
           className={`auth__error ${

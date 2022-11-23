@@ -1,7 +1,7 @@
 import "./Navigation.css";
 
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import iconUser from "../../images/header/iconUser.svg";
 
@@ -35,13 +35,15 @@ const Navigation = () => {
             ></button>
             <ul className="navigation__list">
               <li className="navigation__item navigation__item_main">
-                <Link
+                <NavLink
+                  exact
                   to="/"
                   className="navigation__link"
+                  activeClassName="navigation__link_active"
                   onClick={handleToggleMenu}
                 >
                   Главная
-                </Link>
+                </NavLink>
               </li>
               <li className="navigation__item">
                 <NavLink

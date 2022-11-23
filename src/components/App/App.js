@@ -84,6 +84,7 @@ function App() {
   }, [loggedIn]);
 
   function onLogin({ email, password }) {
+    setIsLoading(true);
     auth
       .authorize({ email, password })
       .then((res) => {
@@ -95,10 +96,14 @@ function App() {
       .catch((err) => {
         setLoginError(err.message);
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
   function onRegister({ name, email, password }) {
+    setIsLoading(true);
     auth
       .register({ name, email, password })
       .then(() => {
@@ -108,6 +113,9 @@ function App() {
       .catch((err) => {
         setRegisterError(err.message);
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -126,6 +134,7 @@ function App() {
   }
 
   function handleEditProfile({ name, email }) {
+    setIsLoading(true);
     mainApi
       .editUserData({ name, email })
       .then((res) => {
@@ -136,6 +145,9 @@ function App() {
         setUserDataUpdateFailed(true);
         setIsPopupOpen(true);
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -153,7 +165,9 @@ function App() {
           setIsPopupOpen(true);
           console.log(err);
         })
-        .finally(() => setIsLoading(false));
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
     filterMovies(value);
   }
@@ -231,7 +245,6 @@ function App() {
   }, [filtersSavedShortMovies, checkedSavedShortMovies]);
 
   function handleToggleMarkerSave(data) {
-    // проверить еще раз
     const saved = moviesMarkedSaved.some(
       (item) => data.movieId === item.movieId
     );
@@ -242,7 +255,15 @@ function App() {
         .then((res) => {
           setMoviesMarkedSaved([res, ...moviesMarkedSaved]);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          if (err === "Ошибка: 401") {
+            setLoggedIn(false);
+            setMovies([]);
+            history.push("/");
+            localStorage.clear();
+          }
+          console.log(err);
+        });
     }
 
     if (saved) {
@@ -332,12 +353,14 @@ function App() {
             onUpdate={handleEditProfile}
             userDataUpdateSuccessful={userDataUpdateSuccessful}
             userDataUpdateFailed={userDataUpdateFailed}
+            isLoading={isLoading}
           ></ProtectedRoute>
           <Route path="/signup">
             <Register
               onRegister={onRegister}
               registerError={registerError}
               setRegisterError={setRegisterError}
+              isLoading={isLoading}
             />
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signup" />}
           </Route>
@@ -346,6 +369,7 @@ function App() {
               onLogin={onLogin}
               loginError={loginError}
               setLoginError={setLoginError}
+              isLoading={isLoading}
             />
             {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/signin" />}
           </Route>
