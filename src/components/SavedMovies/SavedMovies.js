@@ -1,13 +1,30 @@
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-import { savedMovies } from "../../utils/constant";
-
-const SavedMovies = () => {
+const SavedMovies = ({
+  savedMovies,
+  onSubmit,
+  checked,
+  onChecked,
+  onDeleteMovie,
+  onUploadingMovies,
+  pageWithSavedMovies,
+}) => {
   return (
     <section className="saved-movies">
-      <SearchForm />
-      <MoviesCardList movies={savedMovies} />
+      <SearchForm
+        onSubmit={onSubmit}
+        checked={checked}
+        onChecked={onChecked}
+        pageWithSavedMovies={pageWithSavedMovies}
+      />
+      <MoviesCardList
+        movies={savedMovies}
+        savedMovies={savedMovies}
+        onDeleteMovie={onDeleteMovie}
+        onUploadingMovies={onUploadingMovies}
+        pageWithSavedMovies={pageWithSavedMovies}
+      />
     </section>
   );
 };

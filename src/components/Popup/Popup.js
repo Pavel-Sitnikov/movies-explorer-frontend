@@ -1,11 +1,11 @@
 import "./Popup.css";
 
-const Popup = () => {
+const Popup = ({ isOpen, onClose }) => {
   return (
-    <div className="popup">
+    <div className={`popup ${isOpen && "popup__opened"}`}>
       <div className="popup__container">
         <p className="popup__message">Ошибка при выполнении запроса</p>
-        <button className="popup__close" type="button">
+        <button className="popup__close" type="button" onClick={onClose}>
           Закрыть
         </button>
       </div>

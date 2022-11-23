@@ -1,7 +1,7 @@
 import "./Navigation.css";
 
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import iconUser from "../../images/header/iconUser.svg";
 
@@ -17,6 +17,7 @@ const Navigation = () => {
       <button
         className="navigation__button-menu"
         type="button"
+        title="Меню"
         onClick={handleToggleMenu}
       ></button>
       <div
@@ -29,19 +30,27 @@ const Navigation = () => {
             <button
               className="navigation__button-close"
               type="button"
+              title="Закрыть меню"
               onClick={handleToggleMenu}
             ></button>
             <ul className="navigation__list">
               <li className="navigation__item navigation__item_main">
-                <Link to="/" className="navigation__link">
+                <NavLink
+                  exact
+                  to="/"
+                  className="navigation__link"
+                  activeClassName="navigation__link_active"
+                  onClick={handleToggleMenu}
+                >
                   Главная
-                </Link>
+                </NavLink>
               </li>
               <li className="navigation__item">
                 <NavLink
                   to="/movies"
                   className="navigation__link"
                   activeClassName="navigation__link_active"
+                  onClick={handleToggleMenu}
                 >
                   Фильмы
                 </NavLink>
@@ -51,6 +60,7 @@ const Navigation = () => {
                   to="/saved-movies"
                   className="navigation__link"
                   activeClassName="navigation__link_active"
+                  onClick={handleToggleMenu}
                 >
                   Сохранённые фильмы
                 </NavLink>
@@ -60,6 +70,7 @@ const Navigation = () => {
           <NavLink
             to="/profile"
             className="navigation__link navigation__link_user"
+            onClick={handleToggleMenu}
           >
             <p className="navigation__text">Аккаунт</p>
             <img

@@ -2,7 +2,7 @@ import "./Footer.css";
 
 import { useLocation } from "react-router-dom";
 
-import { pathnameForFooter } from "../../utils/constant";
+import { PATHNAME_FOR_FOOTER } from "../../utils/constants";
 
 const Footer = () => {
   const location = useLocation();
@@ -12,7 +12,7 @@ const Footer = () => {
   }
 
   return (
-    checkRoute(pathnameForFooter) && (
+    checkRoute(PATHNAME_FOR_FOOTER) && (
       <footer className="footer">
         <p className="footer__text">
           Учебный проект Яндекс.Практикум х BeatFilm.

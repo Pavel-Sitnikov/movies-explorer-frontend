@@ -1,13 +1,33 @@
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-import { movies } from "../../utils/constant";
+import Preloader from "../Preloader/Preloader";
 
-const Movies = () => {
+const Movies = ({
+  movies,
+  savedMovies,
+  onSubmit,
+  checked,
+  onChecked,
+  isLoading,
+  failedRequest,
+  handleToggleMarkerSave,
+  onUploadingMovies,
+}) => {
   return (
     <section>
-      <SearchForm />
-      <MoviesCardList movies={movies} />
+      <SearchForm onSubmit={onSubmit} checked={checked} onChecked={onChecked} />
+      {isLoading ? (
+        <Preloader />
+      ) : (
+        <MoviesCardList
+          movies={movies}
+          savedMovies={savedMovies}
+          failedRequest={failedRequest}
+          handleToggleMarkerSave={handleToggleMarkerSave}
+          onUploadingMovies={onUploadingMovies}
+        />
+      )}
     </section>
   );
 };

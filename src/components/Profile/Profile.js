@@ -1,35 +1,116 @@
 import "./Profile.css";
 
-const Profile = () => {
+import { useContext, useEffect, useState } from "react";
+
+import { CurrentUserContext } from "../../context/CurrentUserContext";
+
+import useValidation from "../../utils/useValidation";
+
+const Profile = ({
+  onLogout,
+  onUpdate,
+  userDataUpdateSuccessful,
+  userDataUpdateFailed,
+  isLoading,
+}) => {
+  const currentUser = useContext(CurrentUserContext);
+  const [buttonSubmitDisabled, setButtonSubmitDisabled] = useState(false);
+
+  const profileData = {
+    name: currentUser.name,
+    email: currentUser.email,
+  };
+
+  const { values, handleChange, errors, isValid } = useValidation(profileData);
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onUpdate({ name: values.name, email: values.email });
+  }
+
+  useEffect(() => {
+    setButtonSubmitDisabled(
+      !isValid ||
+        (values.name === currentUser.name && values.email === currentUser.email)
+    );
+  }, [isValid, currentUser, values]);
+
   return (
     <section className="profile">
-      <h2 className="profile__title">Привет, Виталий!</h2>
-      <form className="profile__form">
+      <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+      <form className="profile__form" onSubmit={handleSubmit}>
         <label className="profile__label">
           Имя
           <input
             className="profile__input"
             type="text"
             name="name"
-            placeholder="Виталий"
+            minLength="2"
+            maxLength="30"
+            pattern="^[A-Za-zА-Яа-я-\s]+$"
+            autoComplete="off"
             required
+            value={values.name}
+            onChange={handleChange}
+            disabled={isLoading}
           ></input>
+          <span
+            className={`profile__error ${
+              errors.name ? "profile__error_visible" : "profile__error"
+            }`}
+          >
+            {errors.name}
+          </span>
         </label>
         <label className="profile__label">
           E-mail
           <input
             className="profile__input"
-            type="text"
+            type="email"
             name="email"
-            placeholder="pochta@yandex.ru"
+            pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
             required
+            value={values.email}
+            onChange={handleChange}
+            disabled={isLoading}
           ></input>
+          <span
+            className={`profile__error ${
+              errors.email ? "profile__error_visible" : "profile__error"
+            }`}
+          >
+            {errors.email}
+          </span>
         </label>
-        <button className="profile__btn profile__btn_edit" type="button">
+        {userDataUpdateSuccessful ? (
+          <span className="profile__message profile__message_succes">
+            Профиль успешно обновлен
+          </span>
+        ) : (
+          ""
+        )}
+        {userDataUpdateFailed ? (
+          <span className="profile__message profile__message_failed">
+            Ошибка при обновлении профиля
+          </span>
+        ) : (
+          ""
+        )}
+        <button
+          className={`profile__btn profile__btn_edit ${
+            buttonSubmitDisabled ? "profile__btn_edit_disabled" : ""
+          }`}
+          type="submit"
+          disabled={buttonSubmitDisabled || isLoading}
+        >
           Редактировать
         </button>
       </form>
-      <button className="profile__btn profile__btn_logout" type="button">
+      <button
+        className="profile__btn profile__btn_logout"
+        type="button"
+        onClick={onLogout}
+      >
         Выйти из аккаунта
       </button>
     </section>
